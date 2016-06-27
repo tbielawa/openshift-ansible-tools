@@ -1,15 +1,15 @@
-= About
+# About
 
 A Fedora based vagrant environment for testing multi-machine OpenShift clusters.
 
-== Features
+## Features
 
  * Ability to destroy and re-create the environment as necessary.
  * Fully functional DNS within the libvirt network *and* on the host. Systems always at a predictable hostname even after a destroy.
  * No subscriptions required. (uses internal repositories)
  * Uses KVM and libvirt, no need for VirtualBox performance hit.
 
-== Configuring Fedora
+## Configuring Fedora
 
  * `dnf install -y vagrant vagrant-libvirt`
  * Add user username to /etc/groups in the vagrant group and log back in.
@@ -44,10 +44,13 @@ A Fedora based vagrant environment for testing multi-machine OpenShift clusters.
 $ cat /etc/NetworkManager/dnsmasq.d/libvirt_dnsmasq.conf
 server=/aos.example.com/192.168.122.1
    ```
- * TODO: solve complications with using VPN which modifies /etc/resolv.conf on the fly. Can drop a similar script for redhat.com in but this then picked up when trying to CONNECT to the vpn.
+ * If you also use Red Hat's VPN, you need to disable some DNS before connecting to vpn, and re-enable it after:
+   * TODO: solve complications with using VPN which modifies /etc/resolv.conf on the fly.
+   * Before connecting to vpn: `rm /etc/NetworkManager/dnsmasq.d/redhat_dnsmasq.conf && systemctl restart NetworkManager`
+   * After connecting to vpn: `cp redhat_dnsmasq.conf /etc/NetworkManager/dnsmasq.d/redhat_dnsmasq.conf && systemctl restart NetworkManager && cp resolv.conf /etc/resolv.conf`
  * systemctl restart NetworkManager
 
-== Usage
+## Usage
 
 You can now run `vagrant up` to bring up the entire cluster, or `vagrant up m1 n1` to just bring up a subset. Remember to run update-hosts.rb each time the vms are created fresh to update the included hosts file with the new IPs. Libvirt will give them consistent IPs as long as the MAC address does not change, so you only need to do this each time you explicitly destroy them. (halt + up will be fine)
 
