@@ -1,0 +1,61 @@
+
+[OSEv3:children]
+masters
+nodes
+#etcd
+
+[OSEv3:vars]
+ansible_ssh_user=root
+deployment_type=openshift-enterprise
+#openshift_install_examples=True
+
+#openshift_http_proxy=http://file.rdu.redhat.com:3128
+#openshift_https_proxy=http://file.rdu.redhat.com:3128
+
+#openshift_master_portal_net=172.24.0.0/14
+#osm_cluster_network_cidr=172.20.0.0/14
+
+#openshift_docker_additional_registries=brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888
+#openshift_docker_insecure_registries=brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888
+openshift_use_dnsmasq=False
+
+openshift_master_identity_providers=[{'name': 'allow_all', 'login': 'true', 'challenge': 'true', 'kind': 'AllowAllPasswordIdentityProvider'}]
+
+#openshift_hosted_registry_storage_kind=s3
+#openshift_hosted_registry_secured=True
+#openshift_hosted_registry_s3_access_key="{{ lookup('env','AWS_ACCESS_KEY_ID=') }}"
+#openshift_hosted_registry_s3_secret_key="{{ lookup('env','AWS_SECRET_ACCESS_KEY') }}"
+#openshift_hosted_registry_s3_bucket=aos-dgoodwin-registry
+
+deployment_type=openshift-enterprise
+#deployment_type=origin
+
+#openshift_image_tag=v1.2.0
+#openshift_image_tag="v3.2.0.44"
+#openshift_image_tag="v3.1.1.6"
+#openshift_image_tag=v1.3.0-alpha.1
+
+#openshift_release=v3.2
+#openshift_release="1.3"
+#openshift_release="3.2"
+
+#docker_version=1.10.3
+docker_version=1.9.1
+#docker_version=1.8.2
+
+docker_upgrade=False
+
+containerized=true
+openshift_uninstall_images=False
+
+#openshift_node_labels="{'region': 'infra'}"
+
+[masters]
+m1.aos.example.com openshift_ip=192.168.122.150 openshift_public_ip=192.168.122.150 openshift_hostname=m1.aos.example.com openshift_public_hostname=m1.aos.example.com
+
+[nodes]
+m1.aos.example.com openshift_ip=192.168.122.150 openshift_public_ip=192.168.122.150 openshift_hostname=m1.aos.example.com openshift_public_hostname=m1.aos.example.com #openshift_schedulable=False
+#n1.aos.example.com openshift_ip=192.168.122.229 openshift_public_ip=192.168.122.229 openshift_hostname=n1.aos.example.com openshift_public_hostname=n1.aos.example.com
+
+#[etcd]
+#m1.aos.example.com openshift_ip=192.168.122.150 openshift_public_ip=192.168.122.150 openshift_hostname=m1.aos.example.com openshift_public_hostname=m1.aos.example.com

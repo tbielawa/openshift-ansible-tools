@@ -1,0 +1,13 @@
+[aos-latest]
+name=AOS Latest Puddle
+baseurl=http://download.eng.bos.redhat.com/rcm-guest/puddles/RHAOS/AtomicOpenShift/3.2/latest/x86_64/os/
+gpgcheck=0
+enabled=0
+
+[rh7-extras-7.2]
+name=rh7-extras-7.2
+baseurl=http://buildvm-devops.usersys.redhat.com/puddle/build/Docker/1.9/2016-03-10.1/rh7-extras-7.2/$basearch/os
+gpgcheck=0
+enabled=0
+
+

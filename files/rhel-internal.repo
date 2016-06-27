@@ -1,0 +1,11 @@
+[rhel72]
+name=rhel72
+baseurl=http://download.lab.bos.redhat.com/released/RHEL-7/7.2/Server/x86_64/os/
+gpgcheck=0
+enabled=1
+
+[rhel72extras]
+name=rhel72extras
+baseurl=http://download.lab.bos.redhat.com/rel-eng/latest-EXTRAS-7-RHEL-7/compose/Server/x86_64/os/
+gpgcheck=0
+enabled=1

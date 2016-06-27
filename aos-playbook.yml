@@ -1,0 +1,28 @@
+- hosts:
+  - OSEv3:children
+  tasks:
+      #  - name: subscription-manager
+      #    redhat_subscription: state=present username=rhn-engineering-dgoodwin password=PASSWORD autosubscribe=true
+  - yum: name=yum-utils state=installed
+  - name: disable problematic RHEL repos
+    command: yum-config-manager --disable rhel-sap-hana-for-rhel-7-server-rpms --disable "*-htb-*" --disable rhel-sjis-for-rhel-7-server-rpms --disable rhel-7-server-nfv-rpms
+  - name: enable specific RHEL repos
+    command: yum-config-manager --enable rhel-7-server-rpms --enable rhel-7-server-extras-rpms --enable rhel-7-server-optional-rpms
+        #--enable rhel-7-server-ose-3.1-rpms
+        #  - name: root passwd
+        #    user: name=root password=
+      #  - name: copy aos-latest repos
+      #    copy: src=files/aos-latest.repo dest=/etc/yum.repos.d/ owner=root group=root
+      #    tags:
+      #    - repos
+  - name: copy internal RHEL 7 repo
+    copy: src=files/rhel-internal.repo dest=/etc/yum.repos.d/ owner=root group=root
+    tags:
+    - repos
+  - name: delete CDK kubernetes packages that conflict with new openshift
+    yum: name={{ item }} state=removed
+    with_items:
+      - kubernetes
+      - kubernetes-master
+      - kubernetes-client
+      - kubernetes-node

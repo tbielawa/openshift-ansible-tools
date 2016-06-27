@@ -1,0 +1,5 @@
+[Internal-Extras-Repository-2]
+name=Internal-Extras-Repository - 2
+baseurl=http://download.lab.bos.redhat.com/brewroot/repos/extras-rhel-7.2-candidate/latest/$basearch
+gpgcheck=0
+enabled=1
